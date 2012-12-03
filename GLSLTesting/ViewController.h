@@ -17,10 +17,7 @@
   GLuint      _colorSlot;
   GLuint      _projectionUniform;
   GLuint      _modelViewUniform;
-  GLuint      _timeUniform;
-  GLuint      _randUniform;
   GLuint      _thickness;
-  float       timeval;
   ShaderProgram *_shaderProgram;
   ShaderManager *_shaderManager;
   ParticleSystem *particleSystem;

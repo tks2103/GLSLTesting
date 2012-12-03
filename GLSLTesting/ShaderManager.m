@@ -32,9 +32,7 @@
                           @"SourceColor" : @"Attribute",
                           @"Projection"  : @"Uniform",
                           @"ModelView"   : @"Uniform",
-                          @"Thickness"   : @"Uniform",
-                          @"Time"        : @"Uniform",
-                          @"Rand"        : @"Uniform"};
+                          @"Thickness"   : @"Uniform"};
   Shader *vertexShad   = [[Shader alloc] initWithName:@"SimpleVertex" type:@"Vertex" variables:data];
   Shader *fragmentShad = [[Shader alloc] initWithName:@"SimpleFragment" type:@"Fragment" variables:nil];
   

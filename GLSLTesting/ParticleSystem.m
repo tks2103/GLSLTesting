@@ -22,10 +22,8 @@
       Particle *add = [[Particle alloc] initWithOrigin:origin_];
       [particles_ addObject:add];
     }
-    positionVBO_ = malloc(sizeof(GLKVector2) * [particles_ count]);
-    colorVBO_ = malloc(sizeof(GLKVector4) * [particles_ count]);
-    [self generatePositionVBO];
-    [self generateColorVBO];
+    VBO_ = malloc(sizeof(vbo_t) * [particles_ count]);
+    [self generateVBO];
   }
   return self;
 }
@@ -44,45 +42,29 @@
     }
   }
   [particles_ addObjectsFromArray:particlesToAdd];
-  [self generatePositionVBO];
-  [self generateColorVBO];
+  [self generateVBO];
 }
 
 
 
-- (void)generatePositionVBO {
+- (void)generateVBO {
   for (int i = 0; i < maxParticles_; i++) {
     Particle *particle = [particles_ objectAtIndex:i];
-    positionVBO_[i] = particle.position;
+    VBO_[i].position = particle.position;
+    VBO_[i].color = particle.color;
   }
 }
 
 
 
-- (void)generateColorVBO {
-  for (int i = 0; i < maxParticles_; i++) {
-    Particle *particle = [particles_ objectAtIndex:i];
-    colorVBO_[i] = particle.color;
-  }
-}
-
-
-
-- (GLKVector2 *)getPositionVBO {
-  return positionVBO_;
-}
-
-
-
-- (GLKVector4 *)getColorVBO {
-  return colorVBO_;
+- (vbo_t *)getVBO {
+  return VBO_;
 }
 
 
 
 - (void)dealloc {
-  free(positionVBO_);
-  free(colorVBO_);
+  free(VBO_);
 }
 
 

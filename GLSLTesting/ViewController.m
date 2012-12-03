@@ -12,25 +12,15 @@
 #import "ShaderProgram.h"
 #import "ShaderManager.h"
 #import "ParticleSystem.h"
+#import "VBO.h"
 
-typedef struct {
-  float Position[3];
-  float Color[4];
-} Vertex;
-
-const Vertex Vertices[] = {
-  {{ 1, -1, 0}, {1, 0, 0, 1}}
-};
-
-const GLubyte Indices[] = {
-  0
-};
+vbo_t temp[] = {{0,0,0},{1,1,1,1}};
+GLubyte indices[] = {0};
 
 @implementation ViewController
 
 - (void)viewDidLoad {
-  timeval = 0;
-    particleSystem = [[ParticleSystem alloc] initWithMax:1];
+  particleSystem = [[ParticleSystem alloc] initWithMax:1];
   [self setupGL];
   [self setupVBOs];
   [self compileShaders];
@@ -56,24 +46,19 @@ const GLubyte Indices[] = {
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
   glClear(GL_COLOR_BUFFER_BIT);
   
-  GLKMatrix4 projectionMatrix = GLKMatrix4MakeOrtho(-240, 240, -160, 160, -1, 1);
-  glUniform1f(_thickness, 10);
-  glUniform1f(_timeUniform, timeval);
-  GLKVector3 rnd = GLKVector3Make(arc4random() / UINT32_MAX,
-                              arc4random() / UINT32_MAX,
-                              arc4random() / UINT32_MAX);
-  glUniform3f(_randUniform, rnd.x, rnd.y, 0);
+  GLKMatrix4 projectionMatrix = GLKMatrix4MakeOrtho(-100, 100, -75, 75, -1, 1);
+  glUniform1f(_thickness, 20);
   glUniformMatrix4fv(_projectionUniform, 1, 0, &projectionMatrix);
   glUniformMatrix4fv(_modelViewUniform, 1, 0, &_modelViewMatrix);
   
+  
   // 2
-  glVertexAttribPointer(_positionSlot, 2, GL_FLOAT, GL_FALSE, sizeof(GLKVector2), 0);
-  glVertexAttribPointer(_colorSlot, 4, GL_FLOAT, GL_FALSE, sizeof(GLKVector4), sizeof(GLKVector2)*[particleSystem particleCount]);
+  glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(vbo_t), (const GLvoid *) offsetof(vbo_t, position));
+  glVertexAttribPointer(_colorSlot, 4, GL_FLOAT, GL_FALSE, sizeof(vbo_t), (const GLvoid *) offsetof(vbo_t, color));
   
   // 3
-  glDrawArrays(GL_POINTS, 0, particleSystem.particleCount);
-/*  glDrawElements(GL_POINTS, sizeof(Indices)/sizeof(Indices[0]),
-                 GL_UNSIGNED_BYTE, 0);*/
+  //glDrawArrays(GL_POINTS, 0, particleSystem.particleCount);
+  glDrawElements(GL_POINTS, sizeof(indices)/sizeof(indices[0]), GL_UNSIGNED_BYTE, 0);
 }
 
 
@@ -81,7 +66,6 @@ const GLubyte Indices[] = {
 - (void)update {
   glClearColor(0, 0, 0, 1);
   [particleSystem update:[self timeSinceLastUpdate]];
-  timeval += [self timeSinceLastUpdate];
 }
 
 
@@ -100,36 +84,22 @@ const GLubyte Indices[] = {
   glEnableVertexAttribArray(_colorSlot);
   _projectionUniform = [[d objectForKey:@"Projection"] intValue];
   _modelViewUniform = [[d objectForKey:@"ModelView"] intValue];
-  _timeUniform = [[d objectForKey:@"Time"] intValue];
-  _randUniform = [[d objectForKey:@"Rand"] intValue];
 }
 
 
 
 - (void)setupVBOs {
   _modelViewMatrix = GLKMatrix4Identity;
-  /*
+  
   GLuint vertexBuffer;
   glGenBuffers(1, &vertexBuffer);
   glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, 1, temp, GL_STATIC_DRAW);
   
   GLuint indexBuffer;
   glGenBuffers(1, &indexBuffer);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
-  */
-  GLKVector2 *temp = [particleSystem getPositionVBO];
-  GLKVector4 *temp2 = [particleSystem getColorVBO];
-  GLuint positionBuffer;
-  glGenBuffers(1, &positionBuffer);
-  glBindBuffer(GL_ARRAY_BUFFER, positionBuffer);
-  glBufferData(GL_ARRAY_BUFFER, particleSystem.particleCount, [particleSystem getPositionVBO], GL_STATIC_DRAW);
-  
-  GLuint colorBuffer;
-  glGenBuffers(1, &colorBuffer);
-  glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-  glBufferData(GL_ARRAY_BUFFER, particleSystem.particleCount, [particleSystem getColorVBO], GL_STATIC_DRAW);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 }
 
 

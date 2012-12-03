@@ -12,12 +12,12 @@
 @interface Particle : NSObject {
   float       lifetime_;
   float       timelived_;
-  GLKVector2  velocity_;
   GLKVector4  color_;
-  GLKVector2  position_;
+  GLKVector3  velocity_;
+  GLKVector3  position_;
 }
 
-@property (nonatomic, readonly) GLKVector2 position;
+@property (nonatomic, readonly) GLKVector3 position;
 @property (nonatomic, readonly) GLKVector4 color;
 
 - (id)initWithOrigin:(GLKVector2)origin;

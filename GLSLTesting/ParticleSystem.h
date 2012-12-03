@@ -8,22 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
+#import "VBO.h"
 
 @interface ParticleSystem : NSObject {
   NSMutableArray  *particles_;
   int             maxParticles_;
   GLKVector2      origin_;
-  GLKVector2      *positionVBO_;
-  GLKVector4      *colorVBO_;
+  vbo_t           *VBO_;
 }
 
 @property (nonatomic, readonly) int particleCount;
 
 - (id)initWithMax:(int)mp;
 - (void)update:(float)dt;
-- (void)generatePositionVBO;
-- (void)generateColorVBO;
-- (GLKVector2 *)getPositionVBO;
-- (GLKVector4 *)getColorVBO;
+- (void)generateVBO;
+- (vbo_t *)getVBO;
 
 @end

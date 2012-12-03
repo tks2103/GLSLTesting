@@ -60,6 +60,7 @@
 		87982A5A166D18EE00C04D48 /* ParticleSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticleSystem.m; sourceTree = "<group>"; };
 		87982A5C166D18FC00C04D48 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
 		87982A5D166D18FC00C04D48 /* Particle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Particle.m; sourceTree = "<group>"; };
+		87982A9C166D32E100C04D48 /* VBO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VBO.h; path = ../VBO.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				87982A351669885400C04D48 /* Shaders */,
+				87982A9C166D32E100C04D48 /* VBO.h */,
 				87982A191669857200C04D48 /* AppDelegate.h */,
 				87982A1A1669857200C04D48 /* AppDelegate.m */,
 				87982A32166985C500C04D48 /* ViewController.h */,
