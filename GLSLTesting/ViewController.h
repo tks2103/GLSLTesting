@@ -10,6 +10,7 @@
 
 @class ShaderProgram;
 @class ShaderManager;
+@class ParticleSystem;
 
 @interface ViewController : GLKViewController {
   GLuint      _positionSlot;
@@ -22,6 +23,7 @@
   float       timeval;
   ShaderProgram *_shaderProgram;
   ShaderManager *_shaderManager;
+  ParticleSystem *particleSystem;
   GLKVector2  *vertices;
   GLKMatrix4  _modelViewMatrix;
 }

@@ -11,6 +11,7 @@
 #import "Shader.h"
 #import "ShaderProgram.h"
 #import "ShaderManager.h"
+#import "ParticleSystem.h"
 
 typedef struct {
   float Position[3];
@@ -29,6 +30,7 @@ const GLubyte Indices[] = {
 
 - (void)viewDidLoad {
   timeval = 0;
+    particleSystem = [[ParticleSystem alloc] initWithMax:1];
   [self setupGL];
   [self setupVBOs];
   [self compileShaders];
@@ -65,22 +67,20 @@ const GLubyte Indices[] = {
   glUniformMatrix4fv(_modelViewUniform, 1, 0, &_modelViewMatrix);
   
   // 2
-  glVertexAttribPointer(_positionSlot, 3, GL_FLOAT, GL_FALSE,
-                        sizeof(Vertex), 0);
-  glVertexAttribPointer(_colorSlot, 4, GL_FLOAT, GL_FALSE,
-                        sizeof(Vertex), (GLvoid*) (sizeof(float) * 3));
+  glVertexAttribPointer(_positionSlot, 2, GL_FLOAT, GL_FALSE, sizeof(GLKVector2), 0);
+  glVertexAttribPointer(_colorSlot, 4, GL_FLOAT, GL_FALSE, sizeof(GLKVector4), sizeof(GLKVector2)*[particleSystem particleCount]);
   
   // 3
-  glDrawElements(GL_POINTS, sizeof(Indices)/sizeof(Indices[0]),
-                 GL_UNSIGNED_BYTE, 0);
+  glDrawArrays(GL_POINTS, 0, particleSystem.particleCount);
+/*  glDrawElements(GL_POINTS, sizeof(Indices)/sizeof(Indices[0]),
+                 GL_UNSIGNED_BYTE, 0);*/
 }
 
 
 
 - (void)update {
   glClearColor(0, 0, 0, 1);
-  //_modelViewMatrix = GLKMatrix4Rotate(_modelViewMatrix, M_PI_4 / 50, 0, 0, 1);
-  //_modelViewMatrix = GLKMatrix4Translate(_modelViewMatrix, 1, 0, 0);
+  [particleSystem update:[self timeSinceLastUpdate]];
   timeval += [self timeSinceLastUpdate];
 }
 
@@ -108,7 +108,7 @@ const GLubyte Indices[] = {
 
 - (void)setupVBOs {
   _modelViewMatrix = GLKMatrix4Identity;
-  
+  /*
   GLuint vertexBuffer;
   glGenBuffers(1, &vertexBuffer);
   glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
@@ -118,7 +118,18 @@ const GLubyte Indices[] = {
   glGenBuffers(1, &indexBuffer);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices), Indices, GL_STATIC_DRAW);
+  */
+  GLKVector2 *temp = [particleSystem getPositionVBO];
+  GLKVector4 *temp2 = [particleSystem getColorVBO];
+  GLuint positionBuffer;
+  glGenBuffers(1, &positionBuffer);
+  glBindBuffer(GL_ARRAY_BUFFER, positionBuffer);
+  glBufferData(GL_ARRAY_BUFFER, particleSystem.particleCount, [particleSystem getPositionVBO], GL_STATIC_DRAW);
   
+  GLuint colorBuffer;
+  glGenBuffers(1, &colorBuffer);
+  glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
+  glBufferData(GL_ARRAY_BUFFER, particleSystem.particleCount, [particleSystem getColorVBO], GL_STATIC_DRAW);
 }
 
 

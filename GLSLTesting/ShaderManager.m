@@ -34,7 +34,7 @@
                           @"ModelView"   : @"Uniform",
                           @"Thickness"   : @"Uniform",
                           @"Time"        : @"Uniform",
-                          @"Rand"        : @"Uniform"    };
+                          @"Rand"        : @"Uniform"};
   Shader *vertexShad   = [[Shader alloc] initWithName:@"SimpleVertex" type:@"Vertex" variables:data];
   Shader *fragmentShad = [[Shader alloc] initWithName:@"SimpleFragment" type:@"Fragment" variables:nil];
   

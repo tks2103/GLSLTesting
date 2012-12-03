@@ -25,6 +25,8 @@
 		87982A4C166AB58D00C04D48 /* ShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 87982A4B166AB58D00C04D48 /* ShaderProgram.m */; };
 		87982A50166AB91300C04D48 /* Shader.m in Sources */ = {isa = PBXBuildFile; fileRef = 87982A4F166AB91300C04D48 /* Shader.m */; };
 		87982A53166C0EAA00C04D48 /* ShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 87982A52166C0EA900C04D48 /* ShaderManager.m */; };
+		87982A5B166D18EE00C04D48 /* ParticleSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 87982A5A166D18EE00C04D48 /* ParticleSystem.m */; };
+		87982A5E166D18FD00C04D48 /* Particle.m in Sources */ = {isa = PBXBuildFile; fileRef = 87982A5D166D18FC00C04D48 /* Particle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,10 @@
 		87982A4F166AB91300C04D48 /* Shader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shader.m; sourceTree = "<group>"; };
 		87982A51166C0EA900C04D48 /* ShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderManager.h; sourceTree = "<group>"; };
 		87982A52166C0EA900C04D48 /* ShaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderManager.m; sourceTree = "<group>"; };
+		87982A59166D18EE00C04D48 /* ParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleSystem.h; sourceTree = "<group>"; };
+		87982A5A166D18EE00C04D48 /* ParticleSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticleSystem.m; sourceTree = "<group>"; };
+		87982A5C166D18FC00C04D48 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
+		87982A5D166D18FC00C04D48 /* Particle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Particle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +117,10 @@
 				87982A1A1669857200C04D48 /* AppDelegate.m */,
 				87982A32166985C500C04D48 /* ViewController.h */,
 				87982A33166985C500C04D48 /* ViewController.m */,
+				87982A59166D18EE00C04D48 /* ParticleSystem.h */,
+				87982A5A166D18EE00C04D48 /* ParticleSystem.m */,
+				87982A5C166D18FC00C04D48 /* Particle.h */,
+				87982A5D166D18FC00C04D48 /* Particle.m */,
 				87982A51166C0EA900C04D48 /* ShaderManager.h */,
 				87982A52166C0EA900C04D48 /* ShaderManager.m */,
 				87982A4A166AB58D00C04D48 /* ShaderProgram.h */,
@@ -218,6 +228,8 @@
 				87982A4C166AB58D00C04D48 /* ShaderProgram.m in Sources */,
 				87982A50166AB91300C04D48 /* Shader.m in Sources */,
 				87982A53166C0EAA00C04D48 /* ShaderManager.m in Sources */,
+				87982A5B166D18EE00C04D48 /* ParticleSystem.m in Sources */,
+				87982A5E166D18FD00C04D48 /* Particle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
