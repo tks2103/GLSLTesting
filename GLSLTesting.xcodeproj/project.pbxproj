@@ -22,6 +22,9 @@
 		87982A34166985C500C04D48 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87982A33166985C500C04D48 /* ViewController.m */; };
 		87982A371669886900C04D48 /* SimpleVertex.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 87982A361669886900C04D48 /* SimpleVertex.glsl */; };
 		87982A391669887F00C04D48 /* SimpleFragment.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 87982A381669887F00C04D48 /* SimpleFragment.glsl */; };
+		87982A4C166AB58D00C04D48 /* ShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 87982A4B166AB58D00C04D48 /* ShaderProgram.m */; };
+		87982A50166AB91300C04D48 /* Shader.m in Sources */ = {isa = PBXBuildFile; fileRef = 87982A4F166AB91300C04D48 /* Shader.m */; };
+		87982A53166C0EAA00C04D48 /* ShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 87982A52166C0EA900C04D48 /* ShaderManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +48,12 @@
 		87982A33166985C500C04D48 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		87982A361669886900C04D48 /* SimpleVertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleVertex.glsl; sourceTree = "<group>"; };
 		87982A381669887F00C04D48 /* SimpleFragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleFragment.glsl; sourceTree = "<group>"; };
+		87982A4A166AB58D00C04D48 /* ShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderProgram.h; sourceTree = "<group>"; };
+		87982A4B166AB58D00C04D48 /* ShaderProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderProgram.m; sourceTree = "<group>"; };
+		87982A4E166AB91300C04D48 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
+		87982A4F166AB91300C04D48 /* Shader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shader.m; sourceTree = "<group>"; };
+		87982A51166C0EA900C04D48 /* ShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderManager.h; sourceTree = "<group>"; };
+		87982A52166C0EA900C04D48 /* ShaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +111,12 @@
 				87982A1A1669857200C04D48 /* AppDelegate.m */,
 				87982A32166985C500C04D48 /* ViewController.h */,
 				87982A33166985C500C04D48 /* ViewController.m */,
+				87982A51166C0EA900C04D48 /* ShaderManager.h */,
+				87982A52166C0EA900C04D48 /* ShaderManager.m */,
+				87982A4A166AB58D00C04D48 /* ShaderProgram.h */,
+				87982A4B166AB58D00C04D48 /* ShaderProgram.m */,
+				87982A4E166AB91300C04D48 /* Shader.h */,
+				87982A4F166AB91300C04D48 /* Shader.m */,
 				87982A111669857200C04D48 /* Supporting Files */,
 			);
 			path = GLSLTesting;
@@ -200,6 +215,9 @@
 				87982A171669857200C04D48 /* main.m in Sources */,
 				87982A1B1669857200C04D48 /* AppDelegate.m in Sources */,
 				87982A34166985C500C04D48 /* ViewController.m in Sources */,
+				87982A4C166AB58D00C04D48 /* ShaderProgram.m in Sources */,
+				87982A50166AB91300C04D48 /* Shader.m in Sources */,
+				87982A53166C0EAA00C04D48 /* ShaderManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
