@@ -23,5 +23,6 @@
 - (void)update:(float)dt;
 - (void)generateVBO;
 - (vbo_t *)getVBO;
+- (void)logState;
 
 @end

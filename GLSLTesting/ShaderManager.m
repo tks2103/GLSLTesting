@@ -28,11 +28,12 @@
 
 
 - (void)initShaders {
-  NSDictionary *data = @{ @"Position"    : @"Attribute",
+  NSDictionary *d = @{ @"Position"    : @"Attribute",
                           @"SourceColor" : @"Attribute",
                           @"Projection"  : @"Uniform",
                           @"ModelView"   : @"Uniform",
                           @"Thickness"   : @"Uniform"};
+  NSMutableDictionary *data = [NSDictionary dictionaryWithDictionary:d];
   Shader *vertexShad   = [[Shader alloc] initWithName:@"SimpleVertex" type:@"Vertex" variables:data];
   Shader *fragmentShad = [[Shader alloc] initWithName:@"SimpleFragment" type:@"Fragment" variables:nil];
   

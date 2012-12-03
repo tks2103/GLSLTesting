@@ -31,17 +31,17 @@
 
 
 - (void)update:(float)dt {
-  NSMutableArray *particlesToAdd = [[NSMutableArray alloc] init];
   for (int i = 0; i < maxParticles_; i++) {
     Particle *particle = [particles_ objectAtIndex:i];
     [particle update:dt];
     if ([particle isDead]) {
-      [particles_ removeObject:particle];
       Particle *new = [[Particle alloc] initWithOrigin:origin_];
-      [particlesToAdd addObject:new];
+      //NSLog(@"died");
+      //[self logState];
+      [particles_ setObject:new atIndexedSubscript:i];
+      //[self logState];
     }
   }
-  [particles_ addObjectsFromArray:particlesToAdd];
   [self generateVBO];
 }
 
@@ -59,6 +59,15 @@
 
 - (vbo_t *)getVBO {
   return VBO_;
+}
+
+
+
+- (void)logState {
+  for (int i = 0; i < maxParticles_; i++) {
+    Particle *particle = [particles_ objectAtIndex:i];
+    NSLog(@"Particle %d: (%f, %f)", i, particle.position.x, particle.position.y);
+  }
 }
 
 
