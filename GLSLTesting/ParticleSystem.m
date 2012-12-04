@@ -52,6 +52,8 @@
     Particle *particle = [particles_ objectAtIndex:i];
     VBO_[i].position = particle.position;
     VBO_[i].color = particle.color;
+    VBO_[i].time = particle.timelived;
+    VBO_[i].velocity = particle.velocity;
   }
 }
 

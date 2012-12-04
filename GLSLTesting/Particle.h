@@ -17,8 +17,11 @@
   GLKVector3  position_;
 }
 
-@property (nonatomic, readonly) GLKVector3 position;
+@property (nonatomic, readonly) float timelived;
 @property (nonatomic, readonly) GLKVector4 color;
+@property (nonatomic, readonly) GLKVector3 velocity;
+@property (nonatomic, readonly) GLKVector3 position;
+
 
 - (id)initWithOrigin:(GLKVector2)origin;
 - (void)update:(float)dt;

@@ -17,7 +17,7 @@
 @implementation ViewController
 
 - (void)viewDidLoad {
-  particleSystem = [[ParticleSystem alloc] initWithMax:50000];
+  particleSystem = [[ParticleSystem alloc] initWithMax:5000];
   [self setupGL];
   [self setupVBOs];
   [self compileShaders];
@@ -51,7 +51,7 @@
   glBufferData(GL_ARRAY_BUFFER, sizeof(vbo_t)*particleSystem.particleCount, temp, GL_STATIC_DRAW);
   
   GLKMatrix4 projectionMatrix = GLKMatrix4MakeOrtho(-100, 100, -75, 75, -1, 1);
-  glUniform1f(_thickness, 0.1);
+  glUniform1f(_thickness, 1);
   glUniformMatrix4fv(_projectionUniform, 1, 0, (const GLfloat *) &projectionMatrix);
   glUniformMatrix4fv(_modelViewUniform, 1, 0, (const GLfloat *) &_modelViewMatrix);
   
@@ -59,6 +59,10 @@
                         sizeof(vbo_t), (const GLvoid *) offsetof(vbo_t, position));
   glVertexAttribPointer(_colorSlot, 4, GL_FLOAT, GL_FALSE,
                         sizeof(vbo_t), (const GLvoid *) offsetof(vbo_t, color));
+  glVertexAttribPointer(_time, 1, GL_FLOAT, GL_FALSE,
+                        sizeof(vbo_t), (const GLvoid *) offsetof(vbo_t, time));
+  glVertexAttribPointer(_velocity, 3, GL_FLOAT, GL_FALSE,
+                        sizeof(vbo_t), (const GLvoid *) offsetof(vbo_t, velocity));
   
   glDrawArrays(GL_POINTS, 0, particleSystem.particleCount);
   
@@ -82,9 +86,13 @@
   
   _positionSlot = [[d objectForKey:@"Position"] intValue];
   _colorSlot = [[d objectForKey:@"SourceColor"] intValue];
+  _velocity = [[d objectForKey:@"Velocity"] intValue];
+  _time = [[d objectForKey:@"Time"] intValue];
   _thickness = [[d objectForKey:@"Thickness"] intValue];
   glEnableVertexAttribArray(_positionSlot);
   glEnableVertexAttribArray(_colorSlot);
+  glEnableVertexAttribArray(_time);
+  glEnableVertexAttribArray(_velocity);
   _projectionUniform = [[d objectForKey:@"Projection"] intValue];
   _modelViewUniform = [[d objectForKey:@"ModelView"] intValue];
 }

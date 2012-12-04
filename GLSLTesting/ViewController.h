@@ -18,6 +18,8 @@
   GLuint      _projectionUniform;
   GLuint      _modelViewUniform;
   GLuint      _thickness;
+  GLuint      _time;
+  GLuint      _velocity;
   ShaderProgram *_shaderProgram;
   ShaderManager *_shaderManager;
   ParticleSystem *particleSystem;

@@ -13,7 +13,9 @@
 
 typedef struct {
   GLKVector3 position;
+  GLKVector3 velocity;
   GLKVector4 color;
+  float      time;
 } vbo_t;
 
 #endif
