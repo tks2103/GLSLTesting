@@ -10,14 +10,22 @@
 #import <GLKit/GLKit.h>
 #import "VBO.h"
 
+typedef GLKVector2(^Emitter)(GLKVector4);
+
 @interface ParticleSystem : NSObject {
   NSMutableArray  *particles_;
+  Emitter         emitter_;
   int             maxParticles_;
-  GLKVector2      origin_;
+  GLKVector4      boundingBox_;
   vbo_t           *VBO_;
 }
 
 @property (nonatomic, readonly) int particleCount;
+
++ (Emitter)pointEmitter;
++ (Emitter)lineEmitter;
++ (Emitter)circleEmitter;
++ (Emitter)ringEmitter;
 
 - (id)initWithMax:(int)mp;
 - (void)update:(float)dt;

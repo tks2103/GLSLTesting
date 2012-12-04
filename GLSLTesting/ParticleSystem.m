@@ -12,14 +12,69 @@
 
 @implementation ParticleSystem
 
++ (Emitter)pointEmitter {
+  return ^(GLKVector4 bounds) {
+    GLKVector2 origin = GLKVector2Make(bounds.v[0] + bounds.v[2]/2.f,
+                                       bounds.v[1] + bounds.v[3]/2.f);
+    float rand1 = ( (double)arc4random() / UINT32_MAX - 0.5 ) * bounds.v[2] * 0.2;
+    float rand2 = ( (double)arc4random() / UINT32_MAX - 0.5 ) * bounds.v[3] * 0.2;
+    GLKVector2 noise = GLKVector2Make(rand1,
+                                      rand2);
+    return GLKVector2Add(origin, noise);
+  };
+}
+
+
+
++ (Emitter)lineEmitter {
+  return ^(GLKVector4 bounds) {
+    GLKVector2 origin = GLKVector2Make(bounds.v[0],
+                                       bounds.v[1] + bounds.v[3]/2.f);
+    float rand1 = ( (double)arc4random() / UINT32_MAX ) * bounds.v[2];
+    float rand2 = ( (double)arc4random() / UINT32_MAX - 0.5 ) * bounds.v[3] * 0.05;
+    GLKVector2 noise = GLKVector2Make(rand1,
+                                      rand2);
+    return GLKVector2Add(origin, noise);
+  };
+}
+
+
+
++ (Emitter)circleEmitter {
+  return ^(GLKVector4 bounds) {
+    GLKVector2 origin = GLKVector2Make(bounds.v[0] + bounds.v[2]/2.f,
+                                       bounds.v[1] + bounds.v[3]/2.f);
+    float rand1 = ( (double)arc4random() / UINT32_MAX ) * bounds.v[2]/2.f;
+    float rand2 = ( (double)arc4random() / UINT32_MAX ) * 2 * M_PI;
+    GLKVector2 noise = GLKVector2Make(rand1 * cos(rand2), rand1 * sin(rand2));
+    return GLKVector2Add(origin, noise);
+  };
+}
+
+
+
++ (Emitter)ringEmitter {
+  return ^(GLKVector4 bounds) {
+    GLKVector2 origin = GLKVector2Make(bounds.v[0] + bounds.v[2]/2.f,
+                                       bounds.v[1] + bounds.v[3]/2.f);
+    float rand1 = ( (double)arc4random() / UINT32_MAX * 0.1 + 0.9) * bounds.v[2]/2.f;
+    float rand2 = ( (double)arc4random() / UINT32_MAX ) * 2 * M_PI;
+    GLKVector2 noise = GLKVector2Make(rand1 * cos(rand2), rand1 * sin(rand2));
+    return GLKVector2Add(origin, noise);
+  };
+}
+
+
+
 - (id)initWithMax:(int)mp {
   self = [super init];
   if (self) {
     maxParticles_ = mp;
-    origin_ = GLKVector2Make(0, 0);
+    boundingBox_ = GLKVector4Make(-20, -20, 40, 40);
     particles_ = [[NSMutableArray alloc] init];
     for (int i = 0; i < maxParticles_; i++) {
-      Particle *add = [[Particle alloc] initWithOrigin:origin_];
+      emitter_ = [ParticleSystem ringEmitter];
+      Particle *add = [[Particle alloc] initWithOrigin:emitter_(boundingBox_)];
       [particles_ addObject:add];
     }
     VBO_ = malloc(sizeof(vbo_t) * [particles_ count]);
@@ -35,11 +90,8 @@
     Particle *particle = [particles_ objectAtIndex:i];
     [particle update:dt];
     if ([particle isDead]) {
-      Particle *new = [[Particle alloc] initWithOrigin:origin_];
-      //NSLog(@"died");
-      //[self logState];
+      Particle *new = [[Particle alloc] initWithOrigin:emitter_(boundingBox_)];
       [particles_ setObject:new atIndexedSubscript:i];
-      //[self logState];
     }
   }
   [self generateVBO];
