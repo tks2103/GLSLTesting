@@ -35,12 +35,24 @@
   view.context = context;
   view.backgroundColor = [UIColor blueColor];
   
+  label_ = [[UILabel alloc] initWithFrame:CGRectMake(2, 2, 30, 20)];
+  label_.backgroundColor = [UIColor clearColor];
+  label_.textColor = [UIColor whiteColor];
+  fpsLag_ = 0;
+  
   self.view = view;
+  [self.view addSubview:label_];
 }
 
 
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
+  fpsLag_++;
+  if (fpsLag_ > 6) {
+    label_.text = [NSString stringWithFormat:@"%d", (int)(1.f/[self timeSinceLastDraw])];
+    fpsLag_ = 0;
+  }
+  
   glClear(GL_COLOR_BUFFER_BIT);
   
   vbo_t *temp = [particleSystem getVBO];

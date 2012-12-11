@@ -25,6 +25,8 @@
   ParticleSystem *particleSystem;
   GLKVector2  *vertices;
   GLKMatrix4  _modelViewMatrix;
+  UILabel     *label_;
+  int         fpsLag_;
 }
 
 - (void)update;
